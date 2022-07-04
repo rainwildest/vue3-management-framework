@@ -1,0 +1,52 @@
+[
+  {
+    "title": "布局",
+    "children": [
+      {
+        "uuid": "",
+        "type": "div",
+        "text": "容器",
+        "drag": true,
+        "style": { "minHeight": 50 },
+        "children": [
+          {
+            "uuid": "",
+            "type": "img",
+            "drag": false,
+            "text": "图片",
+            "style": { "minHeight": 50 }
+          }
+        ]
+      },
+      {
+        "uuid": "",
+        "type": "tab",
+        "drag": false,
+        "text": "选项卡",
+        "style": { "minHeight": 50 }
+      }
+    ]
+  },
+
+  {
+    "title": "基础",
+    "children": [
+      { "uuid": "", "type": "p", "drag": false, "text": "文本", "style": {} },
+      {
+        "uuid": "",
+        "type": "img",
+        "drag": false,
+        "text": "图片",
+        "style": { "minHeight": 50 }
+      },
+      { "uuid": "", "type": "a", "drag": false, "text": "链接", "style": {} },
+      {
+        "uuid": "",
+        "type": "button",
+        "drag": false,
+        "text": "按钮",
+        "style": {}
+      }
+    ]
+  }
+]
