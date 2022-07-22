@@ -12,18 +12,30 @@ export const useRoutersStore = defineStore("routers", {
   },
 
   actions: {
-    SETVIEWS(views: any) {
+    SetViews(views: any) {
       this.views = views;
       storage.set("views", views);
     },
-    SETCOLLAPSE(status: boolean) {
+
+    SetCollapse(status: boolean) {
       this.collapse = status;
       storage.set("collapse", status);
     },
 
     GetViews() {
-      this.SETVIEWS(dynamic.children);
-      mountDynamicRoutes(dynamic.children || []);
+      const path: any[] = [];
+      dynamic.forEach((item) => {
+        if (!item?.children) return path.push(item);
+
+        item.children.length === 1 ? path.push(...item.children) : path.push(item);
+      });
+
+      this.SetViews(path);
+      mountDynamicRoutes(dynamic || []);
+
+      // this.SetViews(dynamic.children);
+      // mountDynamicRoutes(dynamic.children || []);
+
       return dynamic;
     }
   }

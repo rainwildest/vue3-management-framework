@@ -11,26 +11,39 @@ export const router = createRouter({
   strict: true
 });
 
-// 挂载路由
+/**
+ * @brief 挂载路由
+ * @param {App<Element>} app
+ * @returns Router
+ */
 export const mountRouter = (app: App<Element>) => {
   app.use(router);
 
   return router;
 };
 
-// 加载路由
-// @ts-ignore
+/**
+ * @brief 加载路由
+ * @returns void
+ */
 export async function loadRoutes() {
   const store = useRoutersStore();
   const views = store.views;
 
-  views.length && mountDynamicRoutes(views);
+  views.length && mountDynamicRoutes(dynamic);
 }
 
-// 动态添加路由
+/**
+ * @brief 动态添加路由
+ * @param {Array<RouteRecordRaw>} routers
+ * @returns void
+ */
 export function mountDynamicRoutes(routers: RouteRecordRaw[]) {
-  router.addRoute({ ...dynamic });
-  // // 在动态路由添加后，在将404添加进入，解决刷新是找不到路由跳转404
+  console.log(routers);
+
+  routers.forEach((item) => router.addRoute({ ...item }));
+
+  // 在动态路由添加后，在将404添加进入，解决刷新是找不到路由跳转404
   router.addRoute({
     path: "/:pathMatch(.*)",
     redirect: "/404"

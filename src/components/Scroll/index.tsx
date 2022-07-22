@@ -29,6 +29,7 @@ export default defineComponent({
         }
       }
     };
+
     const moveToTarget = (target: any) => {
       const containerWidth = container.value.offsetWidth;
       const targetLeft = target.offsetLeft;

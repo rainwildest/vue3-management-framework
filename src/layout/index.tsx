@@ -1,7 +1,7 @@
 import { defineComponent, KeepAlive, Transition, reactive, watch, computed } from "vue";
 import { useTagsStore } from "@/stores/modules";
 import { storeToRefs } from "pinia";
-import { ElContainer, ElMain } from "element-plus";
+import { ElContainer, ElMain, ElHeader } from "element-plus";
 // import { useRoute } from "vue-router";
 import Sider from "./components/Sider";
 import Topbar from "./components/Topbar";
@@ -10,6 +10,12 @@ import "./styles/index.scss";
 
 export default defineComponent({
   name: "Layout",
+  props: {
+    layout: {
+      type: String,
+      default: "layout-1"
+    }
+  },
   setup() {
     // const route = useRoute();
 
@@ -46,6 +52,28 @@ export default defineComponent({
               </ElMain>
             </ElContainer>
           </ElContainer>
+          {/* <ElContainer class="overflow-hidden">
+            <ElHeader class="bg-gray-200">Header</ElHeader>
+
+            <ElContainer class="overflow-auto">
+              <Sider />
+              <ElMain>
+                <div class="main__view">
+                  <router-view>
+                    {{
+                      default: ({ Component }: any) => (
+                        <Transition mode="out-in" name="fade-transform">
+                          {{
+                            default: () => <KeepAlive include={caches.value}>{Component}</KeepAlive>
+                          }}
+                        </Transition>
+                      )
+                    }}
+                  </router-view>
+                </div>
+              </ElMain>
+            </ElContainer>
+          </ElContainer> */}
         </div>
       );
     };

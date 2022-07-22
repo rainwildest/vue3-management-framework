@@ -27,7 +27,7 @@ export default defineComponent({
       const target = e.target as HTMLElement;
       const index = target.getAttribute("data-index");
 
-      store.REMOVETAG(parseInt(index || ""));
+      store.RemoveTage(parseInt(index || ""));
 
       toPath();
     };

@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // import AutoImport from "unplugin-auto-import/vite";
 // import Components from "unplugin-vue-components/vite";
 // import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
@@ -26,5 +27,13 @@ export default defineConfig({
       }
     }
   },
-  plugins: [vue(), vueJsx(), ElementPlus({ useSource: true })]
+  plugins: [
+    vue(),
+    vueJsx(),
+    ElementPlus({ useSource: true }),
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), "src/icons")],
+      symbolId: "icon-[dir]-[name]"
+    })
+  ]
 });

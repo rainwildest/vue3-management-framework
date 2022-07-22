@@ -1,9 +1,7 @@
 import NProgress from "nprogress";
 import { Router, RouteLocationNormalized } from "vue-router";
 import { checkToken } from "@/apis/auth";
-import { useUserStore } from "@/stores/modules/user";
-import { useRoutersStore } from "@/stores/modules/routers";
-import { useTagsStore } from "@/stores/modules/tags-view";
+import { useTagsStore } from "@/stores/modules";
 
 NProgress.configure({ showSpinner: false });
 
@@ -31,12 +29,14 @@ export function loadGuards(router: Router) {
         if (hasRoute) {
           const store = useTagsStore();
 
-          store.ADDTAGES({
-            keepAlive: to.meta.keepAlive,
-            label: to.meta.title,
-            value: to.fullPath,
-            name: to.name
-          });
+          if (!to.meta.ignore) {
+            store.AddTages({
+              keepAlive: to.meta.keepAlive,
+              label: to.meta.title,
+              value: to.fullPath,
+              name: to.name
+            });
+          }
 
           next();
         } else {

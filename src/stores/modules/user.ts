@@ -13,20 +13,22 @@ export const useUserStore = defineStore("user", {
   },
 
   actions: {
-    SETUSERINFO(val: any) {
+    SetUserInfo(val: any) {
       this.userinfo = val;
       storage.set("userinfo", val);
     },
-    SETTOKEN(token: string) {
+
+    SetToken(token: string) {
       this.token = token;
       setToken(token);
     },
-    ONLOGIN(data: any) {
+
+    Login(data: any) {
       return new Promise((resolve, reject) => {
         const $data = login(data);
         $data.code === 104 && ElMessage.error("登录失败");
-        $data.data && this.SETUSERINFO($data.data);
-        $data.token && this.SETTOKEN($data.token);
+        $data.data && this.SetUserInfo($data.data);
+        $data.token && this.SetToken($data.token);
 
         resolve($data);
       });

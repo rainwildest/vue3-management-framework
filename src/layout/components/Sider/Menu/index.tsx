@@ -7,29 +7,30 @@ import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Menu",
-  setup() {
+  props: {
+    collapse: {
+      type: Boolean
+    }
+  },
+  setup(props) {
     const { currentRoute } = useRouter();
     const store = useRoutersStore();
     const { views } = storeToRefs(store);
 
     const activedPath = computed(() => {
       const { path } = currentRoute.value;
+
       return path;
     });
 
-    const routeList = computed(() => {
-      if (views.value && views.value.length > 0) {
-        return views.value;
-      }
-      return [];
-    });
+    const routeList = computed(() => (views.value && views.value.length > 0 ? views.value : []));
 
     return () => {
       return (
         <ElAside class="w-full">
-          <ElMenu class="bg-gray-1001 sider-menu" backgroundColor="#304156" textColor="#FFFFFF" defaultActive={activedPath.value} uniqueOpened router>
+          <ElMenu class="bg-gray-1001 sider-menu" backgroundColor="#304156" textColor="#FFFFFF" defaultActive={activedPath.value} uniqueOpened router collapse={props.collapse}>
             {routeList.value.map((route: any) => (
-              <MenuItem key={route.path} item={route}></MenuItem>
+              <MenuItem key={route.path} item={route} />
             ))}
           </ElMenu>
         </ElAside>

@@ -9,7 +9,7 @@ export default defineComponent({
         <div class="bg-gray-1001 sider-container">
           <div class="h-20">KK</div>
           <div class="menu">
-            <Menu />
+            <Menu collapse={false} />
           </div>
         </div>
       );

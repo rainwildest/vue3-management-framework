@@ -15,7 +15,7 @@ export const useTagsStore = defineStore("tags", {
     };
   },
   actions: {
-    ADDTAGES(item: any) {
+    AddTages(item: any) {
       const index = this.tags.findIndex((e) => e.value.split("?")[0] === item.value.split("?")[0]);
       this.tags.map((e) => (e.active = e.value === item.value));
 
@@ -37,7 +37,7 @@ export const useTagsStore = defineStore("tags", {
         this.tags[index].name = item.name;
       }
     },
-    REMOVETAG(index: number) {
+    RemoveTage(index: number) {
       this.tags.splice(index, 1);
     }
   }

@@ -41,7 +41,7 @@ export default defineComponent({
         if (!valid) return;
         loading.value = true;
         setTimeout(async () => {
-          const data: any = await userStore.ONLOGIN(info);
+          const data: any = await userStore.Login(info);
           data.code === 104 && (loading.value = false);
 
           if (data.code === 100) {
