@@ -1,27 +1,26 @@
-import { defineComponent, KeepAlive, Transition, reactive, watch, computed } from "vue";
+import { defineComponent, KeepAlive, Transition, computed } from "vue";
 import { useTagsStore, useConfigStore } from "@/stores/modules";
 import { storeToRefs } from "pinia";
-import { ElContainer, ElMain, ElHeader } from "element-plus";
+import { ElContainer, ElMain } from "element-plus";
 // import { useRoute } from "vue-router";
-import Sider from "./components/Sider";
-import Topbar from "./components/Topbar";
-import TagsView from "./components/TagsView";
-import "./styles/index.scss";
+import Sider from "../Sider";
+import Topbar from "../Topbar";
+import TagsView from "../TagsView";
 
 export default defineComponent({
-  name: "Layout",
+  name: "LayoutNormal",
   props: {
     layout: {
       type: String,
-      default: "layout-1"
+      default: "layout-normal"
     }
   },
-  setup(props, { slots }) {
+  setup() {
     // const route = useRoute();
-    // const configStore = useConfigStore();
+    const configStore = useConfigStore();
     const tagStore = useTagsStore();
     const { tags } = storeToRefs(tagStore);
-    // const { collapse } = storeToRefs(configStore);
+    const { collapse } = storeToRefs(configStore);
 
     // const key = computed(() => route.path);
     const caches = computed(() => [...tags.value.filter((e) => e.keepAlive).map((e) => e.name)]);
@@ -29,17 +28,13 @@ export default defineComponent({
     return () => {
       return (
         <div class="w-full h-full flex">
-          <ElContainer class="overflow-hidden">
-            <ElHeader class="bg-gray-200">Header</ElHeader>
-
-            <ElContainer class="overflow-auto">
-              <Sider>
-                {{
-                  default: () => {
-                    return "skdfsd";
-                  }
-                }}
-              </Sider>
+          <ElContainer>
+            <Sider collapse={collapse.value}></Sider>
+            <ElContainer class="flex-col">
+              <div class="fixed-header bg-gray-200">
+                <Topbar />
+                <TagsView />
+              </div>
               <ElMain>
                 <div class="main__view">
                   <router-view>

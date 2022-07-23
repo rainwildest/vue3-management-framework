@@ -3,13 +3,19 @@ import Menu from "./Menu";
 
 export default defineComponent({
   name: "Sider",
-  setup() {
+  props: {
+    collapse: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup(props, { slots }) {
     return () => {
       return (
         <div class="bg-gray-1001 sider-container">
-          <div class="h-20">KK</div>
+          {slots.default ? slots.default() : ""}
           <div class="menu">
-            <Menu collapse={false} />
+            <Menu collapse={props.collapse} />
           </div>
         </div>
       );

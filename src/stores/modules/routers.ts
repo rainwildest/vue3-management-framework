@@ -6,7 +6,6 @@ import { mountDynamicRoutes } from "@/routers";
 export const useRoutersStore = defineStore("routers", {
   state: () => {
     return {
-      collapse: storage.get("collapse") || false,
       views: storage.get("views") || []
     };
   },
@@ -15,11 +14,6 @@ export const useRoutersStore = defineStore("routers", {
     SetViews(views: any) {
       this.views = views;
       storage.set("views", views);
-    },
-
-    SetCollapse(status: boolean) {
-      this.collapse = status;
-      storage.set("collapse", status);
     },
 
     GetViews() {
@@ -32,9 +26,6 @@ export const useRoutersStore = defineStore("routers", {
 
       this.SetViews(path);
       mountDynamicRoutes(dynamic || []);
-
-      // this.SetViews(dynamic.children);
-      // mountDynamicRoutes(dynamic.children || []);
 
       return dynamic;
     }

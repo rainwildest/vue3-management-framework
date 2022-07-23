@@ -6,6 +6,10 @@ export default defineComponent({
     name: {
       type: String,
       default: ""
+    },
+    className: {
+      type: String,
+      default: ""
     }
   },
   setup(props) {
@@ -17,9 +21,11 @@ export default defineComponent({
       }
     });
 
+    const $className = `icon-svg ${props.className}`;
+
     return () => {
       return (
-        <svg class="icon-svg" aria-hidden={true}>
+        <svg class={$className} aria-hidden={true}>
           <use xlinkHref={iconName.value}></use>
         </svg>
       );
